@@ -1,62 +1,43 @@
-import { useState } from "react";
-import {
-  useSupabaseClient,
-  useUser,
-  SupabaseClient,
-} from "@supabase/auth-helpers-react";
+// src/App.tsx
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { supabase } from "./supabase/supabaseClient";
+import NavBar from "./components/NavBar";
+import HomePage from "./pages/HomePage";
+import RecipePage from "./pages/RecipePage";
+import FavoritesPage from "./pages/FavoritePage";
+import { useAuthStore } from "./store/authStore";
 
 function App() {
-  const supabase: SupabaseClient = useSupabaseClient();
-  const user = useUser();
+  const { user: authStoreUser } = useAuthStore();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const signInWithEmail = async () => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    if (error) console.error("❌ Sign-in error:", error.message);
-    else console.log("✅ Signed in successfully!");
-  };
-
-  const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) console.error("❌ Sign-out error:", error.message);
-    else console.log("👋 Signed out!");
-  };
-
-  if (!user) {
-    return (
-      <div style={{ padding: "2rem" }}>
-        <h2>Login</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <button onClick={signInWithEmail}>Sign In</button>
-      </div>
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event: string, session: any) => {
+        console.log("Auth event:", _event, session);
+      }
     );
-  }
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <p>
-        ✅ Logged in as: <strong>{user.email}</strong>
-      </p>
-      <button onClick={signOut}>Sign Out</button>
-    </div>
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/recipe/:id" element={<RecipePage />} />
+        <Route
+          path="/favorites"
+          element={authStoreUser ? <FavoritesPage /> : <Navigate to="/" />}
+        />
+      </Routes>
+      <header className="app-header">
+        <h1>🍳 Recipe Explorer</h1>
+      </header>
+    </BrowserRouter>
   );
 }
 

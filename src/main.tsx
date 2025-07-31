@@ -1,16 +1,16 @@
-// main.tsx
+// src/main.tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import App from "./App";
 import "./index.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { SessionContextProvider } from "@supabase/auth-helpers-react";
-import { supabase } from "./lib/supbaseClient.ts";
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <SessionContextProvider supabaseClient={supabase}>
+    <QueryClientProvider client={queryClient}>
       <App />
-    </SessionContextProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

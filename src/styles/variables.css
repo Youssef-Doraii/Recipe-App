@@ -1,0 +1,88 @@
+:root {
+  --color-bg: #EEEEEE;
+  --color-bg-card: #00ADB5;         /* Cards are blue */
+  --color-accent: #00ADB5;
+  --color-accent-light: #393E46;
+  --color-text: #222831;
+  --color-text-heading: #222831;
+  --color-text-muted: #393E46;
+  --color-border: #00ADB5;
+  --color-button-bg: #393E46;
+  --color-button-text: #EEEEEE;
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  --color-bg: #222831;
+  --color-bg-card: #393E46;
+  --color-accent: #00ADB5;
+  --color-accent-light: #00ADB5;
+  --color-text: #EEEEEE;
+  --color-text-heading: #00ADB5;
+  --color-text-muted: #EEEEEE;
+  --color-border: #00ADB5;
+  --color-button-bg: #00ADB5;
+  --color-button-text: #222831;
+}
+
+/* Example toggle button styles */
+.theme-toggle-btn {
+  background: var(--color-accent-light);
+  color: var(--color-button-text);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+h1, h2, h3 {
+  color: var(--color-text-heading);
+}
+
+.recipe-card {
+  background: var(--color-bg-card);
+  color: #EEEEEE;
+}
+
+.recipe-card h2 {
+  color: #EEEEEE;
+  font-size: 1.1rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.recipe-desc {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.card-ingredient {
+  background: var(--color-accent-light);
+  color: #EEEEEE;
+}
+
+nav a {
+  color: var(--color-text-heading);
+}
+
+nav button {
+  color: #fff;
+}
+
+nav button:hover {
+  color: var(--color-text-heading);
+}
