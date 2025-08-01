@@ -37,12 +37,12 @@ body {
 
 .recipes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
   justify-items: stretch;
   align-items: stretch;
-  justify-content: start;   /* <-- Add this */
-  align-content: start;     /* <-- Add this */
+  justify-content: start;
+  align-content: start;
 }
 
 .recipe-card {
