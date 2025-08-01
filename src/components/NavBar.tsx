@@ -55,14 +55,16 @@ const NavBar: React.FC = () => {
         Favorites
       </Link>
       <div className="nav-right">
-        {user ? (
-          <>
-            <span>Welcome, {displayName}</span>
-            <button onClick={logout}>Log Out</button>
-          </>
-        ) : (
-          <button onClick={() => setAuthOpen(true)}>Sign In</button>
-        )}
+        <div className="user-info">
+          {user ? (
+            <>
+              <span>Welcome, {displayName}</span>
+              <button onClick={logout}>Log Out</button>
+            </>
+          ) : (
+            <button onClick={() => setAuthOpen(true)}>Sign In</button>
+          )}
+        </div>
       </div>
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
     </nav>
