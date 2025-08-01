@@ -4,8 +4,13 @@ import { supabase } from "./supabase/supabaseClient";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import RecipePage from "./pages/RecipePage";
-import FavoritesPage from "./pages/FavoritePage";
+import Favorites from "./pages/Favorites";
 import { useAuthStore } from "./store/authStore";
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  document.documentElement.setAttribute("data-theme", savedTheme);
+}
 
 function App() {
   const { user: authStoreUser } = useAuthStore();
@@ -30,7 +35,7 @@ function App() {
         <Route path="/recipe/:id" element={<RecipePage />} />
         <Route
           path="/favorites"
-          element={authStoreUser ? <FavoritesPage /> : <Navigate to="/" />}
+          element={authStoreUser ? <Favorites /> : <Navigate to="/" />}
         />
       </Routes>
     </BrowserRouter>

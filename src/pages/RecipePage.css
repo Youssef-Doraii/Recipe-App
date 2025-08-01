@@ -73,7 +73,38 @@
   white-space: pre-line;
   font-size: 1.05rem;
 }
+.favorite {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #bfa900;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: color 0.2s;
+}
+.favorite.active {
+  color: #ffd700;
+}
+.favorite-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #bbb;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: color 0.2s, transform 0.2s;
+  vertical-align: middle;
+  outline: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
 
+.favorite-btn.active,
+.favorite-btn:hover {
+  color: #e63946;
+  transform: scale(1.15);
+}
 @media (max-width: 700px) {
   .recipe-header {
     flex-direction: column;

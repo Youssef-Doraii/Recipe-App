@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchRecipeById } from "../services/recipeService";
 import type { Recipe } from "../types/recipe";
 import "./RecipePage.css";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useFavorites } from "../store/useFavorites";
 
 export default function RecipePage() {
   const { id } = useParams();
@@ -15,6 +17,8 @@ export default function RecipePage() {
     queryFn: () => fetchRecipeById(id!),
     enabled: !!id,
   });
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const favorite = isFavorite(recipe?.id?.toString() ?? "");
 
   if (isLoading) return <div className="loader"></div>;
   if (error || !recipe) return <div>Recipe not found.</div>;
@@ -28,6 +32,17 @@ export default function RecipePage() {
           className="recipe-detail-img"
         />
         <h1 className="recipe-detail-title">{recipe.title}</h1>
+        <button
+          onClick={() =>
+            favorite
+              ? removeFavorite(recipe.id.toString())
+              : addFavorite(recipe)
+          }
+          className={favorite ? "favorite active" : "favorite"}
+          aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
+        >
+          {favorite ? <FaHeart /> : <FaRegHeart />}
+        </button>
       </div>
       <div className="recipe-detail-content">
         <section className="recipe-section">

@@ -3,13 +3,15 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import { supabase } from "../supabase/supabaseClient";
 import AuthModal from "./AuthModal";
+import ThemeSwitch from "./ThemeSwitch";
 import "./NavBar.css";
 
 const NavBar: React.FC = () => {
   const { user, loading, fetchUser, logout, setUser } = useAuthStore();
   const location = useLocation();
   const [darkMode, setDarkMode] = React.useState(
-    document.documentElement.getAttribute("data-theme") === "dark"
+    localStorage.getItem("theme") === "dark" ||
+      document.documentElement.getAttribute("data-theme") === "dark"
   );
   const [authOpen, setAuthOpen] = useState(false);
 
@@ -55,6 +57,7 @@ const NavBar: React.FC = () => {
         Favorites
       </Link>
       <div className="nav-right">
+        <ThemeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
         <div className="user-info">
           {user ? (
             <>
