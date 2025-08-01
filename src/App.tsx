@@ -1,4 +1,3 @@
-// src/App.tsx
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { supabase } from "./supabase/supabaseClient";
@@ -34,9 +33,6 @@ function App() {
           element={authStoreUser ? <FavoritesPage /> : <Navigate to="/" />}
         />
       </Routes>
-      <header className="app-header">
-        <h1>🍳 Recipe Explorer</h1>
-      </header>
     </BrowserRouter>
   );
 }

@@ -1,31 +1,30 @@
 :root {
-  --color-bg: #EEEEEE;
-  --color-bg-card: #00ADB5;         /* Cards are blue */
-  --color-accent: #00ADB5;
-  --color-accent-light: #393E46;
-  --color-text: #222831;
-  --color-text-heading: #222831;
-  --color-text-muted: #393E46;
-  --color-border: #00ADB5;
-  --color-button-bg: #393E46;
-  --color-button-text: #EEEEEE;
+  --color-bg: #F5EFE7;
+  --color-bg-card: #D8C4B6;
+  --color-accent: #213555;
+  --color-accent-light: #3E5879;
+  --color-text: #213555;
+  --color-text-heading: #213555;
+  --color-text-muted: #3E5879;
+  --color-border: #213555;
+  --color-button-bg: #213555;
+  --color-button-text: #F5EFE7;
 }
 
 /* Dark mode */
 [data-theme="dark"] {
-  --color-bg: #222831;
-  --color-bg-card: #393E46;
-  --color-accent: #00ADB5;
-  --color-accent-light: #00ADB5;
-  --color-text: #EEEEEE;
-  --color-text-heading: #00ADB5;
-  --color-text-muted: #EEEEEE;
-  --color-border: #00ADB5;
-  --color-button-bg: #00ADB5;
-  --color-button-text: #222831;
+  --color-bg: #213555;
+  --color-bg-card: #3E5879;
+  --color-accent: #D8C4B6;
+  --color-accent-light: #F5EFE7;
+  --color-text: #F5EFE7;
+  --color-text-heading: #D8C4B6;
+  --color-text-muted: #D8C4B6;
+  --color-border: #D8C4B6;
+  --color-button-bg: #D8C4B6;
+  --color-button-text: #213555;
 }
 
-/* Example toggle button styles */
 .theme-toggle-btn {
   background: var(--color-accent-light);
   color: var(--color-button-text);
@@ -47,19 +46,22 @@ body {
   font-family: 'Inter', Arial, sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 h1, h2, h3 {
   color: var(--color-text-heading);
+  font-weight: 700;
 }
 
 .recipe-card {
   background: var(--color-bg-card);
-  color: #EEEEEE;
+  color: var(--color-text);
 }
 
 .recipe-card h2 {
-  color: #EEEEEE;
+  color: var(--color-text-heading);
   font-size: 1.1rem;
   margin: 0.5rem 0 0 0;
 }
@@ -72,17 +74,19 @@ h1, h2, h3 {
 
 .card-ingredient {
   background: var(--color-accent-light);
-  color: #EEEEEE;
+  color: var(--color-button-text); 
 }
 
 nav a {
-  color: var(--color-text-heading);
+  color: var(--color-button-text); 
 }
 
 nav button {
-  color: #fff;
+  color: var(--color-button-text);
+  background: var(--color-button-bg);
 }
 
 nav button:hover {
-  color: var(--color-text-heading);
+  color: var(--color-bg);
+  background: var(--color-accent-light);
 }

@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSupabaseClient, useSession } from "@supabase/auth-helpers-react";
+import "../src/styles/Auth.css";
 
-export default function Auth() {
+interface AuthProps {
+  onAuthSuccess?: () => void;
+}
+
+export default function Auth({ onAuthSuccess }: AuthProps) {
   const supabase = useSupabaseClient();
   const session = useSession();
 
@@ -9,6 +14,12 @@ export default function Auth() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [authType, setAuthType] = useState<"signIn" | "signUp">("signIn");
+
+  useEffect(() => {
+    if (session && onAuthSuccess) {
+      onAuthSuccess();
+    }
+  }, [session, onAuthSuccess]);
 
   const handleAuth = async () => {
     setLoading(true);
@@ -31,39 +42,37 @@ export default function Auth() {
 
   if (session) {
     return (
-      <div className="p-4">
+      <div className="auth-container">
         <p>Logged in as: {session.user.email}</p>
-        <button onClick={handleLogout}>Log Out</button>
+        <button className="auth-btn" onClick={handleLogout}>
+          Log Out
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="p-4">
+    <div className="auth-container">
       <h2>{authType === "signIn" ? "Sign In" : "Sign Up"}</h2>
       <input
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="border p-2 mb-2 block"
+        className="auth-input"
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="border p-2 mb-2 block"
+        className="auth-input"
       />
-      <button
-        onClick={handleAuth}
-        disabled={loading}
-        className="bg-blue-500 text-white px-4 py-2"
-      >
+      <button onClick={handleAuth} disabled={loading} className="auth-btn">
         {loading ? "Loading..." : authType === "signIn" ? "Sign In" : "Sign Up"}
       </button>
       <p
-        className="text-sm mt-4 cursor-pointer text-blue-600 underline"
+        className="auth-toggle"
         onClick={() => setAuthType(authType === "signIn" ? "signUp" : "signIn")}
       >
         {authType === "signIn"

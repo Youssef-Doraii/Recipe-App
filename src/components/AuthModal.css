@@ -1,0 +1,29 @@
+.auth-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(33,53,85,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.auth-modal {
+  background: var(--color-bg-card);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(33,53,85,0.18);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  min-width: 320px;
+  position: relative;
+}
+
+.auth-modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--color-accent);
+  cursor: pointer;
+}
