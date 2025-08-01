@@ -40,6 +40,9 @@ const NavBar: React.FC = () => {
     });
   };
 
+  // Get display name or fallback to email
+  const displayName = user?.user_metadata?.display_name || user?.email || "";
+
   return (
     <nav>
       <Link to="/" className={location.pathname === "/" ? "active" : ""}>
@@ -52,21 +55,10 @@ const NavBar: React.FC = () => {
         Favorites
       </Link>
       <div className="nav-right">
-        <label className="theme-switch">
-          <input
-            type="checkbox"
-            checked={darkMode}
-            onChange={toggleDarkMode}
-            aria-label="Toggle dark mode"
-          />
-          <span className="slider"></span>
-        </label>
-        {loading ? (
-          <span>Loading...</span>
-        ) : user ? (
+        {user ? (
           <>
-            <span>Welcome, {user.user_metadata?.name || user.email}</span>
-            <button onClick={logout}>Logout</button>
+            <span>Welcome, {displayName}</span>
+            <button onClick={logout}>Log Out</button>
           </>
         ) : (
           <button onClick={() => setAuthOpen(true)}>Sign In</button>

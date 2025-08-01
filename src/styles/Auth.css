@@ -50,3 +50,39 @@
   text-decoration: underline;
   text-align: center;
 }
+
+.google-btn {
+  background: #4285F4;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.google-btn:hover:not(:disabled) {
+  background: #3367d6;
+}
+
+.auth-error {
+  color: #b00020;
+  background: #ffeaea;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.97rem;
+  text-align: center;
+}
+
+.auth-info {
+  color: #225c1c;
+  background: #eaffea;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.97rem;
+  text-align: center;
+}
