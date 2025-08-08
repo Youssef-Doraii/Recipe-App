@@ -7,7 +7,7 @@ import ThemeSwitch from "./ThemeSwitch";
 import "./NavBar.css";
 
 const NavBar: React.FC = () => {
-  const { user, loading, fetchUser, logout, setUser } = useAuthStore();
+  const { user, fetchUser, logout, setUser } = useAuthStore();
   const location = useLocation();
   const [darkMode, setDarkMode] = React.useState(
     localStorage.getItem("theme") === "dark" ||
@@ -26,21 +26,6 @@ const NavBar: React.FC = () => {
       listener?.subscription.unsubscribe();
     };
   }, [fetchUser, setUser]);
-
-  const handleLogin = async () => {
-    await supabase.auth.signInWithOAuth({ provider: "google" });
-  };
-
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => {
-      const newMode = !prev;
-      document.documentElement.setAttribute(
-        "data-theme",
-        newMode ? "dark" : "light"
-      );
-      return newMode;
-    });
-  };
 
   // Get display name or fallback to email
   const displayName = user?.user_metadata?.display_name || user?.email || "";

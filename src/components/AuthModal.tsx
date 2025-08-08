@@ -10,13 +10,11 @@ interface AuthModalProps {
 const AuthModal: React.FC<AuthModalProps> = ({ open, onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Focus trap and ESC close
   useEffect(() => {
     if (!open) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      // Focus trap
       if (e.key === "Tab" && modalRef.current) {
         const focusableEls = modalRef.current.querySelectorAll<HTMLElement>(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -34,7 +32,6 @@ const AuthModal: React.FC<AuthModalProps> = ({ open, onClose }) => {
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    // Focus the modal on open
     setTimeout(() => {
       modalRef.current?.focus();
     }, 0);

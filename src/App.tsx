@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.PROD ? "/Recipe-App" : "/"}>
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />

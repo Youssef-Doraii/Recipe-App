@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchRecipes } from "../services/recipeService";
 import type { Recipe } from "../types/recipe";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import "./HomePage.css";
 
 export default function HomePage() {
