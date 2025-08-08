@@ -1,11 +1,13 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchRecipes } from "../services/recipeService";
 import type { Recipe } from "../types/recipe";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import "./HomePage.css";
+import { useSession } from "@supabase/auth-helpers-react";
+import RandomRecipeButton from "../components/RandomRecipeButton";
 
-export default function HomePage() {
+const HomePage = () => {
   const {
     data: recipes,
     isLoading,
@@ -16,13 +18,16 @@ export default function HomePage() {
   });
 
   const [search, setSearch] = useState("");
+  const session = useSession();
 
   // Filter recipes by name or ingredient
   const filteredRecipes = recipes?.filter((recipe) => {
     const query = search.toLowerCase();
     return (
       recipe.title.toLowerCase().includes(query) ||
-      recipe.ingredients.some((ing) => ing.name.toLowerCase().includes(query))
+      recipe.ingredients.some((ing) =>
+        (ing.name ?? "").toLowerCase().includes(query)
+      )
     );
   });
 
@@ -31,38 +36,53 @@ export default function HomePage() {
 
   return (
     <div className="recipes-container">
-      <h1>All Recipes</h1>
-      <input
-        className="search-bar"
-        type="text"
-        placeholder="Search by name or ingredient..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={{
-          marginBottom: "1.5rem",
-          width: "100%",
-          padding: "0.7rem",
-          fontSize: "1rem",
-          borderRadius: "6px",
-          border: "1px solid #ccc",
-        }}
-      />
+      <div className="recipes-header-row">
+        <h1>All Recipes</h1>
+        <RandomRecipeButton recipes={recipes ?? []} setSearch={setSearch} />
+      </div>
+      <div className="search-bar-wrapper">
+        <input
+          className="search-bar"
+          type="text"
+          placeholder="Search by name or ingredient..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{
+            marginBottom: "1.5rem",
+            width: "100%",
+            padding: "0.7rem",
+            fontSize: "1rem",
+            borderRadius: "6px",
+            border: "1px solid #ccc",
+          }}
+        />
+        {search && (
+          <button
+            className="search-clear-btn"
+            onClick={() => setSearch("")}
+            aria-label="Clear search"
+            type="button"
+          >
+            ×
+          </button>
+        )}
+      </div>
       <div className="recipes-grid">
         {filteredRecipes?.length ? (
           filteredRecipes.map((recipe) => (
             <div key={recipe.id} className="recipe-card">
               <Link to={`/recipe/${recipe.id}`}>
                 <div className="image-wrapper">
-                  <img src={recipe.image_url} alt={recipe.title} />
+                  <img src={recipe.image_url ?? ""} alt={recipe.title} />
                 </div>
                 <h2>{recipe.title}</h2>
                 <ul className="card-ingredients-list">
-                  {recipe.ingredients.slice(0, 4).map((ing, idx) => (
+                  {(recipe.ingredients || []).slice(0, 4).map((ing, idx) => (
                     <li key={idx} className="card-ingredient">
-                      {ing.name}
+                      {ing.name ?? ""}
                     </li>
                   ))}
-                  {recipe.ingredients.length > 4 && (
+                  {(recipe.ingredients || []).length > 4 && (
                     <li className="card-ingredient">...</li>
                   )}
                 </ul>
@@ -75,4 +95,6 @@ export default function HomePage() {
       </div>
     </div>
   );
-}
+};
+
+export default HomePage;

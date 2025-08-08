@@ -1,0 +1,43 @@
+.random-recipe-btn {
+  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+  color: var(--color-button-text);
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(33,53,85,0.12);
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+  display: block;
+}
+
+.random-recipe-btn:hover {
+  background: linear-gradient(90deg, var(--color-accent-light) 0%, var(--color-accent) 100%);
+  color: var(--color-bg);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.random-recipe-result {
+  background: var(--color-bg-card);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(33,53,85,0.08);
+  padding: 1.2rem 1rem 1rem 1rem;
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  animation: fadeIn 0.5s;
+}
+
+.random-recipe-result h2 {
+  margin: 0 0 0.5rem 0;
+  color: var(--color-text-heading);
+  font-size: 1.15rem;
+}
+
+.random-recipe-result p {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  margin: 0;
+}

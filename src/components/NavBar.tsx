@@ -5,6 +5,7 @@ import { supabase } from "../supabase/supabaseClient";
 import AuthModal from "./AuthModal";
 import ThemeSwitch from "./ThemeSwitch";
 import "./NavBar.css";
+import { FaBars, FaTimes } from "react-icons/fa"; // Add this import
 
 const NavBar: React.FC = () => {
   const { user, fetchUser, logout, setUser } = useAuthStore();
@@ -14,6 +15,7 @@ const NavBar: React.FC = () => {
       document.documentElement.getAttribute("data-theme") === "dark"
   );
   const [authOpen, setAuthOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // Add this state
 
   React.useEffect(() => {
     fetchUser();
@@ -30,28 +32,42 @@ const NavBar: React.FC = () => {
   // Get display name or fallback to email
   const displayName = user?.user_metadata?.display_name || user?.email || "";
 
+  // Close menu on navigation
+  React.useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
   return (
     <nav>
-      <Link to="/" className={location.pathname === "/" ? "active" : ""}>
-        Home
-      </Link>
-      <Link
-        to="/favorites"
-        className={location.pathname === "/favorites" ? "active" : ""}
+      <button
+        className="hamburger"
+        aria-label="Open menu"
+        onClick={() => setMenuOpen((v) => !v)}
       >
-        Favorites
-      </Link>
-      <div className="nav-right">
-        <ThemeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
-        <div className="user-info">
-          {user ? (
-            <>
-              <span>Welcome, {displayName}</span>
-              <button onClick={logout}>Log Out</button>
-            </>
-          ) : (
-            <button onClick={() => setAuthOpen(true)}>Sign In</button>
-          )}
+        {menuOpen ? <FaTimes /> : <FaBars />}
+      </button>
+      <div className={`nav-links${menuOpen ? " open" : ""}`}>
+        <Link to="/" className={location.pathname === "/" ? "active" : ""}>
+          Home
+        </Link>
+        <Link
+          to="/favorites"
+          className={location.pathname === "/favorites" ? "active" : ""}
+        >
+          Favorites
+        </Link>
+        <div className="nav-right">
+          <ThemeSwitch darkMode={darkMode} setDarkMode={setDarkMode} />
+          <div className="user-info">
+            {user ? (
+              <>
+                <span>Welcome, {displayName}</span>
+                <button onClick={logout}>Log Out</button>
+              </>
+            ) : (
+              <button onClick={() => setAuthOpen(true)}>Sign In</button>
+            )}
+          </div>
         </div>
       </div>
       <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
