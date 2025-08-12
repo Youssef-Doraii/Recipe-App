@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchRecipeById } from "../services/recipeService";
 import type { Recipe } from "../types/recipe";
 import "./RecipePage.css";
-import { useFavorites } from "../store/useFavorites";
+import { useUnifiedFavorites } from "../store/useUnifiedFavorites";
 
 export default function RecipePage() {
   const { id } = useParams();
@@ -16,7 +16,7 @@ export default function RecipePage() {
     queryFn: () => fetchRecipeById(id!),
     enabled: !!id,
   });
-  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const { addFavorite, removeFavorite, isFavorite } = useUnifiedFavorites();
   const favorite = isFavorite(recipe?.id?.toString() ?? "");
 
   if (isLoading) return <div className="loader"></div>;

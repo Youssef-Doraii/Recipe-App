@@ -34,10 +34,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/recipe/:id" element={<RecipePage />} />
-        <Route
-          path="/favorites"
-          element={authStoreUser ? <Favorites /> : <Navigate to="/" />}
-        />
+        <Route path="/favorites" element={<Favorites />} />
         <Route
           path="/profile"
           element={authStoreUser ? <ProfilePage /> : <Navigate to="/" />}

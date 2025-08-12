@@ -1,19 +1,22 @@
-import { useFavorites } from "../store/useFavorites";
+import { useUnifiedFavorites } from "../store/useUnifiedFavorites";
 import { Link } from "react-router-dom";
 
 export default function Favorites() {
-  const { favorites } = useFavorites();
+  const { favorites } = useUnifiedFavorites();
+  const list = Array.isArray(favorites) ? favorites : [];
 
   return (
     <div className="recipes-container">
       <h1>Your Favorites</h1>
       <div className="recipes-grid">
-        {favorites.length ? (
-          favorites.map((recipe) => (
+        {list.length ? (
+          list.map((recipe) => (
             <div key={recipe.id} className="recipe-card">
               <Link to={`/recipe/${recipe.id}`}>
                 <div className="image-wrapper">
-                  <img src={recipe.image_url} alt={recipe.title} />
+                  {recipe.image_url ? (
+                    <img src={recipe.image_url} alt={recipe.title} />
+                  ) : null}
                 </div>
                 <h2>{recipe.title}</h2>
               </Link>
