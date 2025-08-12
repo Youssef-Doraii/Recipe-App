@@ -6,7 +6,7 @@ type AuthState = {
   user: User | null;
   loading: boolean;
   setUser: (user: User | null) => void;
-  fetchUser: () => Promise<void>;
+  fetchUser: () => Promise<User | null>;
   logout: () => Promise<void>;
 };
 
@@ -15,9 +15,27 @@ export const useAuthStore = create<AuthState>((set) => ({
   loading: true,
   setUser: (user) => set({ user }),
   fetchUser: async () => {
-    set({ loading: true });
-    const { data } = await supabase.auth.getUser();
-    set({ user: data.user ?? null, loading: false });
+    try {
+      const {
+        data: { user: currentUser },
+      } = await supabase.auth.getUser();
+
+      if (currentUser) {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+
+        set({ user: currentUser });
+        return currentUser;
+      } else {
+        set({ user: null });
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      set({ user: null });
+      return null;
+    }
   },
   logout: async () => {
     await supabase.auth.signOut();

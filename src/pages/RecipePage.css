@@ -73,38 +73,79 @@
   white-space: pre-line;
   font-size: 1.05rem;
 }
-.favorite {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #bfa900;
-  cursor: pointer;
-  margin-left: 0.5rem;
-  transition: color 0.2s;
-}
-.favorite.active {
-  color: #ffd700;
-}
+.favorite,
 .favorite-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #bbb;
+  background: none !important;
+  border: none !important;
   cursor: pointer;
   margin-left: 0.5rem;
-  transition: color 0.2s, transform 0.2s;
-  vertical-align: middle;
-  outline: none;
   padding: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
+  box-shadow: none !important;
+  outline: none;
+  transition: color 0.2s, transform 0.2s, filter 0.2s;
+  color: #bfa900;
 }
 
-.favorite-btn.active,
-.favorite-btn:hover {
-  color: #e63946;
-  transform: scale(1.15);
+.favorite {
+  font-size: 1.5rem;
 }
+
+.favorite-btn {
+  font-size: 2rem;
+}
+
+.favorite svg path:not(:first-child),
+.favorite-btn svg path:not(:first-child) {
+  display: none !important;
+}
+
+.favorite svg,
+.favorite-btn svg {
+  color: #ffd700;
+  filter: drop-shadow(0 0 8px #ffe066cc);
+}
+
+.favorite.active,
+.favorite-btn.active,
+.favorite:hover,
+.favorite-btn:hover {
+  color: #ffd700;
+}
+
+.favorite.active svg,
+.favorite-btn.active svg,
+.favorite:hover svg,
+.favorite-btn:hover svg {
+  filter: drop-shadow(0 0 8px #ffe066cc);
+}
+
+.favorite-btn:hover,
+.favorite:hover {
+  transform: scale(1.15);
+  background: transparent !important; 
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.favorite-btn:hover svg,
+.favorite:hover svg {
+  filter: drop-shadow(0 0 8px #ffe066cc) !important;
+  color: #ffd700 !important;
+}
+
+.favorite-btn:focus,
+.favorite:focus,
+.favorite-btn:active,
+.favorite:active {
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 @media (max-width: 700px) {
   .recipe-header {
     flex-direction: column;

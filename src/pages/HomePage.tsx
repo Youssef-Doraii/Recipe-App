@@ -4,7 +4,6 @@ import { fetchRecipes } from "../services/recipeService";
 import type { Recipe } from "../types/recipe";
 import { Link } from "react-router-dom";
 import "./HomePage.css";
-import { useSession } from "@supabase/auth-helpers-react";
 import RandomRecipeButton from "../components/RandomRecipeButton";
 
 const HomePage = () => {
@@ -18,7 +17,6 @@ const HomePage = () => {
   });
 
   const [search, setSearch] = useState("");
-  const session = useSession();
 
   // Filter recipes by name or ingredient
   const filteredRecipes = recipes?.filter((recipe) => {

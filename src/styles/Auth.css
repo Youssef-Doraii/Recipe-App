@@ -1,35 +1,66 @@
 .auth-container {
-  max-width: 340px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: var(--color-bg-card);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(33,53,85,0.08);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 2.5rem 2rem 2rem 2rem;
+  background: transparent;
   color: var(--color-text);
+  border-radius: 0;
+  box-shadow: none;
+  font-family: 'Inter', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: stretch;
+}
+
+.auth-container h2 {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-heading);
+  text-align: center;
+  letter-spacing: -0.5px;
 }
 
 .auth-input {
-  display: block;
   width: 100%;
-  margin-bottom: 1rem;
-  padding: 0.6rem;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  background: var(--color-bg);
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: block;
+  margin-bottom: 0.9rem;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg-card);
   color: var(--color-text);
   font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.auth-input:focus {
+  border: 1.5px solid var(--color-accent);
+  outline: none;
+  background: #fff;
 }
 
 .auth-btn {
   background: var(--color-accent);
   color: var(--color-button-text);
   border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  transition: background 0.2s;
+  font-weight: 700;
+  font-size: 1.08rem;
+  margin-bottom: 0.7rem;
+  margin-top: 0.2rem;
+  width: 100%;
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(33,53,85,0.08);
 }
 
 .auth-btn:disabled {
@@ -38,51 +69,99 @@
 }
 
 .auth-btn:hover:not(:disabled) {
-  background: var(--color-accent-light);
-  color: var(--color-bg);
-}
-
-.auth-toggle {
-  font-size: 0.95rem;
-  margin-top: 1rem;
-  color: var(--color-accent-light);
-  cursor: pointer;
-  text-decoration: underline;
-  text-align: center;
+  background: var(--color-highlight);
 }
 
 .google-btn {
-  background: #4285F4;
-  color: #fff;
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  border: 1.5px solid var(--color-border);
   font-weight: 600;
-  margin-bottom: 1rem;
-  border: none;
-  border-radius: 6px;
-  padding: 0.6rem 1.2rem;
+  margin-bottom: 0.7rem;
+  border-radius: 8px;
+  padding: 0.7rem 1.2rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, border 0.2s;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(33,53,85,0.06);
+  gap: 0.7rem;
+}
+
+.google-btn::before {
+  content: "";
+  display: inline-block;
+  background: url('https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg') no-repeat center/contain;
+  width: 22px;
+  height: 22px;
+  margin-right: 0.7rem;
 }
 
 .google-btn:hover:not(:disabled) {
-  background: #3367d6;
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-accent);
+  color: var(--color-text);
+}
+
+.auth-btn.apple-btn,
+.auth-btn[style*="background: #000"] {
+  background: #232323 !important;
+  color: #fff !important;
+}
+
+.auth-btn.apple-btn:hover,
+.auth-btn[style*="background: #000"]:hover {
+  background: #484848 !important;
 }
 
 .auth-error {
-  color: #b00020;
-  background: #ffeaea;
+  color: var(--color-error);
+  background: #fff0f0;
   border-radius: 4px;
   padding: 0.5rem 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
   font-size: 0.97rem;
   text-align: center;
 }
 
 .auth-info {
-  color: #225c1c;
-  background: #eaffea;
+  color: var(--color-success);
+  background: #f0fff0;
   border-radius: 4px;
   padding: 0.5rem 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
   font-size: 0.97rem;
   text-align: center;
+}
+
+.auth-toggle {
+  font-size: 0.97rem;
+  margin-top: 0.7rem;
+  color: var(--color-accent);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  display: block;
+  transition: color 0.2s;
+}
+
+.auth-toggle:hover {
+  color: var(--color-highlight);
+}
+
+@media (max-width: 500px) {
+  .auth-modal {
+    max-width: 98vw;
+    min-width: 0;
+    border-radius: 12px;
+  }
+  .auth-container {
+    padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+    max-width: 98vw;
+  }
 }

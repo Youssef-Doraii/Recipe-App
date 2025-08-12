@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import RecipePage from "./pages/RecipePage";
 import Favorites from "./pages/Favorites";
+import ProfilePage from "./pages/ProfilePage";
 import { useAuthStore } from "./store/authStore";
 
 const savedTheme = localStorage.getItem("theme");
@@ -36,6 +37,10 @@ function App() {
         <Route
           path="/favorites"
           element={authStoreUser ? <Favorites /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/profile"
+          element={authStoreUser ? <ProfilePage /> : <Navigate to="/" />}
         />
       </Routes>
     </BrowserRouter>

@@ -26,7 +26,7 @@ export const useFavorites = create<FavoritesState>()(
       isFavorite: (id) => get().favorites.some((fav) => String(fav.id) === id),
     }),
     {
-      name: "favorites-storage", // localStorage key
+      name: "favorites-storage",
     }
   )
 );

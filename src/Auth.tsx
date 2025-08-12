@@ -73,6 +73,17 @@ export default function Auth({ onAuthSuccess }: AuthProps) {
     setLoading(false);
   };
 
+  const handleAppleSignIn = async () => {
+    setLoading(true);
+    setError(null);
+    setInfo(null);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "apple",
+    });
+    if (error) setError(error.message);
+    setLoading(false);
+  };
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
   };
@@ -93,7 +104,23 @@ export default function Auth({ onAuthSuccess }: AuthProps) {
 
   return (
     <div className="auth-container">
-      <h2>{authType === "signIn" ? "Sign In" : "Sign Up"}</h2>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h2
+          style={{
+            margin: 0,
+            flex: 1,
+            textAlign: "center",
+          }}
+        >
+          {authType === "signIn" ? "Sign In" : "Sign Up"}
+        </h2>
+      </div>
       {error && <div className="auth-error">{error}</div>}
       {info && <div className="auth-info">{info}</div>}
       <button
@@ -103,6 +130,14 @@ export default function Auth({ onAuthSuccess }: AuthProps) {
         disabled={loading}
       >
         {loading ? "Loading..." : "Sign in with Google"}
+      </button>
+      <button
+        type="button"
+        className="auth-btn apple-btn"
+        onClick={handleAppleSignIn}
+        disabled={loading}
+      >
+        {loading ? "Loading..." : "Sign in with Apple"}
       </button>
       <input
         type="email"

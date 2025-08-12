@@ -16,7 +16,6 @@ export default function Favorites() {
                   <img src={recipe.image_url} alt={recipe.title} />
                 </div>
                 <h2>{recipe.title}</h2>
-                {/* ...other card info... */}
               </Link>
             </div>
           ))

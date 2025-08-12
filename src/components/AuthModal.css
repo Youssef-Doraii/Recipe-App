@@ -10,20 +10,53 @@
 
 .auth-modal {
   background: var(--color-bg-card);
-  border-radius: 10px;
-  box-shadow: 0 8px 32px rgba(33,53,85,0.18);
-  padding: 2rem 1.5rem 1.5rem 1.5rem;
-  min-width: 320px;
+  color: var(--color-text);
+  border-radius: 18px;
+  box-shadow: 0 8px 40px rgba(112, 128, 144, 0.13);
+  padding: 0.7rem 0.8rem 1rem 0.8rem; /* Reduced top padding */
+  min-width: 0;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 320px;
+  width: 100%;
+  min-height: 0;
+  overflow: visible;
+  transition: var(--transition);
 }
 
 .auth-modal-close {
   position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  background: none;
+  top: 1.1rem;
+  right: 1.2rem;
+  background: none;         /* No background */
   border: none;
-  font-size: 2rem;
-  color: var(--color-accent);
+  font-size: 1.35rem;
+  color: #888;
   cursor: pointer;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.18s;
+  z-index: 2;
+  padding: 0;
+  line-height: 1;
+  box-shadow: none;
+}
+
+.auth-modal-close:hover {
+  background: none;         /* No background on hover */
+  color: #e53935;
+}
+
+@media (max-width: 500px) {
+  .auth-modal {
+    max-width: 96vw;
+    padding: 0.7rem 0.2rem 1rem 0.2rem;
+    border-radius: 12px;
+  }
 }

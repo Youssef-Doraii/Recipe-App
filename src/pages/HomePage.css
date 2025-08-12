@@ -135,7 +135,6 @@ header {
 .search-bar-wrapper {
   position: relative;
   width: 100%;
-  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
 }
@@ -143,8 +142,7 @@ header {
 .search-bar {
   width: 100%;
   box-sizing: border-box;
-  padding-right: 2.2rem; /* space for the clear button */
-  margin-bottom: 0; /* Remove margin if present */
+  padding-right: 2.2rem;
 }
 
 .search-clear-btn {
@@ -152,7 +150,7 @@ header {
   right: 0.8rem;
   top: 33%;
   transform: translateY(-50%);
-  background: none;
+  background: none !important;
   border: none;
   color: #888;
   font-size: 1.2rem;
@@ -178,7 +176,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .recipes-header-row h1 {

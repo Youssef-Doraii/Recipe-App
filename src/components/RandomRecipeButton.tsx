@@ -29,7 +29,6 @@ const RandomRecipeButton: React.FC<RandomRecipeButtonProps> = ({
       randomIndex = Math.floor(Math.random() * recipes.length);
     } while (recipes.length > 1 && randomIndex === lastIndexRef.current);
     lastIndexRef.current = randomIndex;
-    // Clear search first to force update, then set after a tick
     setSearch("");
     setTimeout(() => {
       setSearch(recipes[randomIndex].title);
