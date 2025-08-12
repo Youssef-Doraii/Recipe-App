@@ -21,9 +21,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       } = await supabase.auth.getUser();
 
       if (currentUser) {
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
+        await supabase.auth.getSession();
 
         set({ user: currentUser });
         return currentUser;

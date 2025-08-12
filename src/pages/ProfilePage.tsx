@@ -40,7 +40,7 @@ const ProfilePage: React.FC = () => {
         null;
 
       setAvatarUrl(userAvatar);
-      console.log("Avatar URL:", userAvatar); // For debugging
+      console.log("Avatar URL:", userAvatar);
     }
   }, [user]);
 
@@ -187,9 +187,6 @@ const ProfilePage: React.FC = () => {
   return (
     <div className="profile-main-bg">
       <div className="profile-card">
-        <button className="profile-close-btn" onClick={() => navigate("/")}>
-          ×
-        </button>
         <div className="profile-card-header">
           <div className="profile-avatar-large">
             <div
